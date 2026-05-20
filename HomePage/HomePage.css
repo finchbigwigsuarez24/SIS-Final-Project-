@@ -1,0 +1,275 @@
+*
+{
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body 
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.topbar 
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: #0f1a34;
+    color: white;
+}
+
+.topbar__brand
+{
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.topbar__user 
+{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14.5px;
+}
+
+.topbar__user-label 
+{
+    color: white;
+}
+
+.topbar__user-label strong 
+{
+    color: white;
+}
+
+.topbar__divider 
+{
+    color: #4a5a7a;
+    font-size: 25px;
+}
+
+.btn-logout 
+{
+    background: transparent;
+    border: 2px solid red;
+    color: red;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn-logout:hover 
+{
+    background: red;
+    color: black;
+}
+
+.layout 
+{
+    display: flex;
+    flex: 1;
+}
+
+.sidebar 
+{
+    min-height: 528px;
+    width: 200px;
+    background: white;
+    border-right: 2px solid black;
+    padding: 16px 0;
+}
+
+.sidebar ul 
+{
+    list-style: none;
+}
+
+.homesidebar a 
+{
+    background: #f0f4ff;
+    color: black;
+}
+
+.sidebar ul li a
+{
+    display: block;
+    padding: 12px 24px;
+    color: black;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+}
+
+.sidebar ul li a:hover 
+{
+    background: #f0f4ff;
+    color: #1a3a7a;
+}
+
+.content 
+{
+    flex: 1;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.hero 
+{
+    border-radius: 10px;
+    background: #0f1a34;
+    color: white;
+    text-align: center;
+    padding: 20px 16px;
+}
+
+.hero h1 
+{
+    font-size: 24px;
+    letter-spacing: 0.02em;
+    margin-bottom: 10px;
+}
+
+.hero p 
+{
+    font-size: 17px;
+    color: #c8d4f0;
+    margin-bottom: 4px;
+}
+
+.hero p strong 
+{
+    color: white;
+}
+
+.hero__sub 
+{
+    font-size: 14px;
+    color: #c8d4f0;
+}
+
+.section-heading 
+{
+    display: block;
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.section-heading::after 
+{
+    display: block;
+    content: "";
+    margin: 6px 0;
+    height: 4px;
+    background: green;
+    border-radius: 999px;
+}
+
+.cards 
+{
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card 
+{
+    background: white;
+    border: 2px solid #0f1a34;
+    border-radius: 16px;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start;
+}
+
+.card:hover 
+{
+    transform: translateY(-3px);
+}
+
+.card--admin 
+{
+    border-color: orange;
+}
+
+.card__icon 
+{
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.card__icon img 
+{
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+}
+
+.card h2 
+{
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.card p 
+{
+    font-size: 13px;
+    color: #5d6576;
+    line-height: 1.5;
+    margin: 0;
+    flex: 1;
+}
+
+.btn 
+{
+    display: inline-block;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    transition: opacity 0.18s, transform 0.15s;
+    margin-top: 6px;
+}
+
+.btn:hover 
+{
+    transform: translateY(-1px);
+}
+
+.btn--primary 
+{
+    background: green;
+    color: white;
+}
+
+.btn--admin 
+{
+    background: orange;
+    color: white;
+}

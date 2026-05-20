@@ -1,0 +1,398 @@
+FINAL PROJECT WORKFLOW AND FILE GUIDE
+
+This project is a simple USJ-R School Management System made with PHP, CSS,
+MySQL, and PDO. It lets a logged-in user manage schools, departments, programs,
+students, and system users.
+
+Simple Meaning of CRUD
+- Create means add a new record.
+- Read means view/list records.
+- Update means edit an existing record.
+- Delete means remove an existing record.
+
+
+OVERALL WORKFLOW
+
+1. The database is created using usjr-database.sql.
+   This creates the usjr database and the tables used by the system:
+   users, colleges, departments, programs, and students.
+
+2. db.php connects the PHP pages to the MySQL database.
+   All pages that need data include db.php so they can use the $pdo database
+   connection.
+
+3. The user starts at LogInPage/LogInPage.php.
+   The user enters a username and password. If the account exists in the users
+   table, the page saves the user information in the PHP session.
+
+4. After login, the user goes to HomePage/HomePage.php.
+   This page shows the main dashboard and links to the main sections:
+   Schools, Departments, Programs, Students, and Users.
+
+5. Most pages check if the user is logged in.
+   If there is no active session, the page sends the user back to the login
+   page.
+
+6. The sidebar is used for navigation.
+   The user can move between Home, Schools, Departments, Programs, and Students.
+   The Users section is shown for Administrator accounts.
+
+7. Each main section has a list page and separate pages for create, update, and
+   delete actions.
+   Example:
+   - SchoolsPage.php shows the school list.
+   - SchoolCreatePage.php adds a school.
+   - SchoolUpdatePage.php edits a school.
+   - SchoolDeletePage.php deletes a school.
+
+8. The system follows this data order:
+   School -> Department -> Program -> Student
+
+   This means:
+   - A department belongs to one school.
+   - A program belongs to one department and one school.
+   - A student belongs to one school, one department, and one program.
+
+9. Delete pages usually check related records first.
+   For example, a school cannot be deleted if it still has departments.
+   A department cannot be deleted if it still has programs or students.
+   A program cannot be deleted if it still has students.
+
+10. Logout destroys the session and returns the user to the login page.
+
+
+DATABASE FILES
+
+db.php
+- Stores the database connection settings.
+- Connects to the usjr MySQL database using PDO.
+- Creates the $pdo variable used by the other PHP files.
+
+usjr-database.sql
+- Creates the usjr database.
+- Creates the tables:
+  users, colleges, departments, programs, and students.
+- Adds sample records for schools, departments, programs, and the admin user.
+
+sysuser.csv
+- A sample CSV file for user accounts.
+- Used by UsersPage/UserCreatePage/UserCreatePage.php when uploading/importing
+  users.
+
+Workflow.txt
+- This file.
+- Explains the project workflow and the purpose of every file.
+
+
+ASSETS FOLDER
+
+assets/school.png
+- Image/icon used for the Schools card.
+
+assets/department.png
+- Image/icon used for the Departments card.
+
+assets/program.png
+- Image/icon used for the Programs card.
+
+assets/student.png
+- Image/icon used for the Students card.
+
+assets/cog.png
+- Image/icon used for the User Management card.
+
+
+LOGIN PAGE FILES
+
+LogInPage/LogInPage.php
+- The first page where users log in.
+- Checks the username and password from the users table.
+- If login is correct, it saves userid, username, usertype, and userrole in the
+  session.
+- If login is wrong, it shows an error message.
+- If the user is already logged in, it redirects to HomePage/HomePage.php.
+
+LogInPage/LogInPage.css
+- Styles the login page, top bar, login form, hero section, cards, and error
+  message.
+
+
+HOME PAGE FILES
+
+HomePage/HomePage.php
+- The dashboard after login.
+- Shows the logged-in username.
+- Provides quick access cards for Schools, Departments, Programs, and Students.
+- Shows the User Management card only when the logged-in user is an
+  Administrator.
+- Has a logout link.
+
+HomePage/HomePage.css
+- Styles the home dashboard, sidebar, top bar, cards, buttons, and layout.
+
+
+SCHOOLS PAGE FILES
+
+SchoolsPage/SchoolsPage.php
+- Shows all schools from the colleges table.
+- Displays School ID, School Full Name, and School Short Name.
+- Has buttons to create, update, and delete school records.
+
+SchoolsPage/SchoolsPage.css
+- Styles the school list page, table, sidebar, top bar, and action buttons.
+
+SchoolsPage/SchoolCreatePage/SchoolCreatePage.php
+- Adds a new school to the colleges table.
+- Validates the school ID, full name, and short name.
+- Checks if the school ID already exists before inserting.
+
+SchoolsPage/SchoolCreatePage/SchoolCreatePage.css
+- Styles the create school form and buttons.
+
+SchoolsPage/SchoolUpdatePage/SchoolUpdatePage.php
+- Edits an existing school.
+- Uses collid from the URL to know which school to edit.
+- Updates the school full name and short name.
+- Checks that the new school full name does not duplicate another school.
+
+SchoolsPage/SchoolUpdatePage/SchoolUpdatePage.css
+- Styles the update school form and messages.
+
+SchoolsPage/SchoolDeletePage/SchoolDeletePage.php
+- Deletes a school from the colleges table.
+- Uses collid from the URL to know which school to delete.
+- Checks first if the school still has departments.
+- If departments exist, deletion is blocked.
+
+SchoolsPage/SchoolDeletePage/SchoolDeletePage.css
+- Styles the delete school confirmation page.
+
+
+DEPARTMENTS PAGE FILES
+
+DepartmentsPage/DepartmentsPage.php
+- Shows departments, but only after the user selects a school.
+- Loads schools from the colleges table for the dropdown.
+- Loads departments from the departments table based on the selected school.
+- Has buttons to create, update, and delete department records.
+
+DepartmentsPage/DepartmentsPage.css
+- Styles the department list page, dropdown filters, table, and buttons.
+
+DepartmentsPage/DepartmentCreatePage/DepartmentCreatePage.php
+- Adds a new department.
+- Uses collid from the URL to know which school the department belongs to.
+- Validates department ID, full name, and short name.
+- Checks if the department ID already exists before inserting.
+
+DepartmentsPage/DepartmentCreatePage/DepartmentCreatePage.css
+- Styles the create department form.
+
+DepartmentsPage/DepartmentUpdatePage/DepartmentUpdatePage.php
+- Edits an existing department.
+- Uses deptid from the URL to know which department to edit.
+- Updates department full name and short name.
+- Checks that the new department full name does not duplicate another
+  department.
+
+DepartmentsPage/DepartmentUpdatePage/DepartmentUpdatePage.css
+- Styles the update department form and messages.
+
+DepartmentsPage/DepartmentDeletePage/DepartmentDeletePage.php
+- Deletes a department.
+- Uses deptid from the URL to know which department to delete.
+- Checks first if the department still has programs or students.
+- If linked programs or students exist, deletion is blocked.
+
+DepartmentsPage/DepartmentDeletePage/DepartmentDeletePage.css
+- Styles the delete department confirmation page.
+
+
+PROGRAMS PAGE FILES
+
+ProgramsPage/ProgramsPage.php
+- Shows programs, but only after the user selects a school and department.
+- Loads schools first, then departments for the selected school.
+- Loads programs from the programs table based on the selected department.
+- Has buttons to create, update, and delete program records.
+
+ProgramsPage/ProgramsPage.css
+- Styles the program list page, dropdown filters, table, and buttons.
+
+ProgramsPage/ProgramCreatePage/ProgramCreatePage.php
+- Adds a new program.
+- Uses deptid from the URL to know which department the program belongs to.
+- Finds the related school through the selected department.
+- Validates program ID, full name, and short name.
+- Checks for duplicate program ID and duplicate program full name.
+
+ProgramsPage/ProgramCreatePage/ProgramCreatePage.css
+- Styles the create program form.
+
+ProgramsPage/ProgramUpdatePage/ProgramUpdatePage.php
+- Edits an existing program.
+- Uses progid from the URL to know which program to edit.
+- Updates program full name and short name.
+- Checks that the new program full name does not duplicate another program.
+
+ProgramsPage/ProgramUpdatePage/ProgramUpdatePage.css
+- Styles the update program form and messages.
+
+ProgramsPage/ProgramDeletePage/ProgramDeletePage.php
+- Deletes a program.
+- Uses progid from the URL to know which program to delete.
+- Checks first if the program still has students.
+- If students exist, deletion is blocked.
+
+ProgramsPage/ProgramDeletePage/ProgramDeletePage.css
+- Styles the delete program confirmation page.
+
+
+STUDENTS PAGE FILES
+
+StudentsPage/StudentsPage.php
+- Shows students, but only after the user selects a school, department, and
+  program.
+- Loads schools, departments, and programs for the dropdown filters.
+- Loads students from the students table based on the selected program.
+- Displays Student ID, Last Name, First Name, Middle Name, Year, and Actions.
+- Has buttons to create, update, and delete student records.
+
+StudentsPage/StudentsPage.css
+- Styles the student list page, dropdown filters, table, and buttons.
+
+StudentsPage/StudentCreatePage/StudentCreatePage.php
+- Adds a new student.
+- Uses progid from the URL to know which program the student belongs to.
+- Finds the related department and school from that program.
+- Validates student ID, first name, middle name, last name, and year.
+- Checks if the student ID already exists before inserting.
+
+StudentsPage/StudentCreatePage/StudentCreatePage.css
+- Styles the create student form.
+
+StudentsPage/StudentUpdatePage/StudentUpdatePage.php
+- Edits an existing student.
+- Uses studid from the URL to know which student to edit.
+- Updates the student's name and year.
+- Keeps the student connected to the same school, department, and program.
+
+StudentsPage/StudentUpdatePage/StudentUpdatePage.css
+- Styles the update student form and messages.
+
+StudentsPage/StudentDeletePage/StudentDeletePage.php
+- Deletes a student.
+- Uses studid from the URL to know which student to delete.
+- Shows a confirmation page before removing the student record.
+
+StudentsPage/StudentDeletePage/StudentDeletePage.css
+- Styles the delete student confirmation page.
+
+
+USERS PAGE FILES
+
+UsersPage/UsersPage.php
+- The user management dashboard.
+- Provides buttons for Manage Users and Add Users.
+- This section is mainly intended for Administrator accounts.
+
+UsersPage/UsersPage.css
+- Styles the user dashboard, sidebar, top bar, and action buttons.
+
+UsersPage/UserCreatePage/UserCreatePage.php
+- Adds users by uploading a CSV file.
+- Reads rows from the uploaded CSV file.
+- Checks if userid or username already exists.
+- Inserts valid user records into the users table.
+
+UsersPage/UserCreatePage/UserCreatePage.css
+- Styles the user CSV upload form and messages.
+
+UsersPage/UserListPage/UsersListPage.php
+- Shows all users from the users table.
+- Displays User ID, User Name, User Type, User Role, and Actions.
+- Has buttons to update or delete users.
+
+UsersPage/UserListPage/UsersListPage.css
+- Styles the user list table and buttons.
+
+UsersPage/UserListPage/UserUpdatePage/UserUpdatePage.php
+- Edits an existing user.
+- Uses userid from the URL to know which user to edit.
+- Updates username, user type, user role, and optionally password.
+- Checks that the username does not duplicate another user.
+
+UsersPage/UserListPage/UserUpdatePage/UserUpdatePage.css
+- Styles the update user form and messages.
+
+UsersPage/UserListPage/UserDeletePage/UserDeletePage.php
+- Deletes a user.
+- Uses userid from the URL to know which user to delete.
+- Shows a confirmation page before removing the user record.
+
+UsersPage/UserListPage/UserDeletePage/UserDeletePage.css
+- Styles the delete user confirmation page.
+
+
+HOW THE PAGES ARE CONNECTED
+
+Login flow:
+LogInPage/LogInPage.php -> HomePage/HomePage.php
+
+Main navigation:
+HomePage/HomePage.php -> SchoolsPage/SchoolsPage.php
+HomePage/HomePage.php -> DepartmentsPage/DepartmentsPage.php
+HomePage/HomePage.php -> ProgramsPage/ProgramsPage.php
+HomePage/HomePage.php -> StudentsPage/StudentsPage.php
+HomePage/HomePage.php -> UsersPage/UsersPage.php
+
+School workflow:
+SchoolsPage/SchoolsPage.php
+-> SchoolCreatePage/SchoolCreatePage.php
+-> SchoolUpdatePage/SchoolUpdatePage.php?collid=...
+-> SchoolDeletePage/SchoolDeletePage.php?collid=...
+
+Department workflow:
+DepartmentsPage/DepartmentsPage.php
+-> select a school
+-> DepartmentCreatePage/DepartmentCreatePage.php?collid=...
+-> DepartmentUpdatePage/DepartmentUpdatePage.php?deptid=...
+-> DepartmentDeletePage/DepartmentDeletePage.php?deptid=...
+
+Program workflow:
+ProgramsPage/ProgramsPage.php
+-> select a school
+-> select a department
+-> ProgramCreatePage/ProgramCreatePage.php?deptid=...
+-> ProgramUpdatePage/ProgramUpdatePage.php?progid=...
+-> ProgramDeletePage/ProgramDeletePage.php?progid=...
+
+Student workflow:
+StudentsPage/StudentsPage.php
+-> select a school
+-> select a department
+-> select a program
+-> StudentCreatePage/StudentCreatePage.php?progid=...
+-> StudentUpdatePage/StudentUpdatePage.php?studid=...
+-> StudentDeletePage/StudentDeletePage.php?studid=...
+
+User workflow:
+UsersPage/UsersPage.php
+-> UserCreatePage/UserCreatePage.php
+-> UserListPage/UsersListPage.php
+-> UserUpdatePage/UserUpdatePage.php?userid=...
+-> UserDeletePage/UserDeletePage.php?userid=...
+
+
+SHORT SUMMARY
+
+The project works like this:
+1. Set up the database using usjr-database.sql.
+2. db.php connects the PHP pages to the database.
+3. Log in through LogInPage/LogInPage.php.
+4. Use HomePage/HomePage.php to open the main modules.
+5. Manage records in this order:
+   Schools -> Departments -> Programs -> Students
+6. Administrators can also manage users.
+7. Each PHP page handles the page logic and database action.
+8. Each CSS file controls the design of its matching PHP page.

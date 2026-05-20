@@ -1,0 +1,10 @@
+﻿`userid`,`username`,`password`,`usertype`,`userrole`
+1,admin,usjr123,Administrator,Administrator
+2,finch,bigwig,User,Creator
+3,klent,ian,User,Viewer
+4,keinth,nino,User,Updater
+5,sebastian,anselmo,User,Remover
+6,jesus,christ,User,Creator
+7,joefele,kaete,User,Viewer
+8,nicole,yan,user,Viewer
+9,bigwig,finch,User,Viewer

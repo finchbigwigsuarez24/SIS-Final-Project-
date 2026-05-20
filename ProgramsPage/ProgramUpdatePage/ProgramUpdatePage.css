@@ -1,0 +1,252 @@
+*
+{
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.topbar
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    background: #0f1a34;
+    color: white;
+}
+
+.topbar__brand
+{
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.topbar__user
+{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14.5px;
+}
+
+.topbar__user-label,
+.topbar__user-label strong
+{
+    color: white;
+}
+
+.topbar__divider
+{
+    color: #4a5a7a;
+    font-size: 25px;
+}
+
+.btn-logout
+{
+    background: transparent;
+    border: 2px solid red;
+    color: red;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.btn-logout:hover
+{
+    background: red;
+    color: black;
+}
+
+.layout
+{
+    display: flex;
+    flex: 1;
+}
+
+.sidebar
+{
+    min-height: 526px;
+    width: 200px;
+    background: white;
+    border-right: 2px solid black;
+    padding: 16px 0;
+}
+
+.sidebar ul
+{
+    list-style: none;
+}
+
+.programssidebar a
+{
+    background: #f0f4ff;
+}
+
+.sidebar ul li a
+{
+    display: block;
+    padding: 12px 24px;
+    text-decoration: none;
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+    transition: background 0.15s, color 0.15s;
+}
+
+.sidebar ul li a:hover
+{
+    background: #f0f4ff;
+    color: #1a3a7a;
+}
+
+.content
+{
+    flex: 1;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.page-header h2
+{
+    margin: 0;
+    font-size: 26px;
+}
+
+.alert
+{
+    margin-bottom: 14px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.alert--error
+{
+    background: #ffe5e5;
+    border: 1px solid #f5c2c2;
+    color: #7a1f1f;
+}
+
+.alert--success
+{
+    background: #e5f7e5;
+    border: 1px solid #c2f5c2;
+    color: #1f7a1f;
+}
+
+.form-container
+{
+    background: transparent;
+    padding: 0;
+}
+
+.program-form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-group
+{
+    display: flex;
+    align-items: center;
+}
+
+.form-group label
+{
+    width: 180px;
+    min-width: 180px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.form-group input
+{
+    width: 330px;
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border: 1px solid #aab0bb;
+    border-radius: 4px;
+    font-size: 14px;
+    background: white;
+    color: #1a1a2e;
+    transition: border-color 0.15s;
+}
+
+.form-group input:focus
+{
+    outline: none;
+}
+
+.field-error
+{
+    margin-left: 10px;
+    font-size: 13px;
+    color: #c0392b;
+    white-space: nowrap;
+}
+
+.form-actions
+{
+    display: flex;
+    gap: 6px;
+    margin-top: 6px;
+    padding-left: 180px;
+}
+
+.btn
+{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 14px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: opacity 0.15s;
+}
+
+.btn:hover
+{
+    opacity: 0.85;
+}
+
+.btn--primary
+{
+    background: #f0f0f0;
+    border-color: black;
+}
+
+.btn--secondary
+{
+    background: #f0f0f0;
+    border-color: black;
+    color: black;
+}
+
+.btn--danger
+{
+    background: red;
+    color: white;
+    border-color: red;
+}
